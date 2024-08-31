@@ -1,11 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import store from "@/store";
 
-const api = location.href.includes("192.168.3.20")
-  ? "http://localhost:10100"
-  : "https://api.mailmonster.com.br";
-
 const collection = "account";
+const api = "https://api.veaconta.com";
 
 const updateAccount = async ({ id, data }) => {
   try {
@@ -106,8 +103,27 @@ const loginAccount = async ({ id }) => {
   }
 };
 
+const getAccountByEmail = async ({ email }) => {
+  try {
+    const account = await fetch(`${api}/firebase/get`, {
+      body: JSON.stringify({
+        collection,
+        where: [{ field: "email", operator: "==", value: email }],
+      }),
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((data) => data.json());
+    return account;
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
+};
+
 export {
   accountExists,
+  getAccountByEmail,
   updateAccount,
   createAccount,
   getAccount,
