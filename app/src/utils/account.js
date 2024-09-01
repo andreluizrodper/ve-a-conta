@@ -6,7 +6,7 @@ const api = "https://api.veaconta.com";
 
 const updateAccount = async ({ id, data }) => {
   try {
-    fetch(`${api}/firebase`, {
+    await fetch(`${api}/firebase`, {
       body: JSON.stringify({
         collection,
         id,
@@ -76,13 +76,14 @@ const accountExists = async ({ owner }) => {
   })
     .then((data) => data.json())
     .then((res) => {
-      return !!res;
+      return !res.empty;
     });
   return accountExist;
 };
 
 const loginAccount = async ({ id }) => {
   try {
+    console.log(id);
     await fetch(`${api}/firebase/get`, {
       body: JSON.stringify({
         collection,

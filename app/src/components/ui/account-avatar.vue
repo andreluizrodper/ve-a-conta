@@ -11,8 +11,8 @@
         v-if="showName && account"
         class="flex flex-col justify-center items-start"
       >
-        {{ account.data().name }}
-        <span class="text-xs">{{ account.data().email }}</span>
+        {{ account.name }}
+        <span class="text-xs">{{ account.email }}</span>
       </div>
     </div>
     <slot :account="account" />
@@ -46,8 +46,9 @@ export default {
   },
   computed: {
     initials() {
-      if (!this.account || !this.account.data().name) return "";
-      const parts = this.account.data().name.split(" ");
+      if (!this.account) return "";
+      if (!this.account.name) return "A";
+      const parts = this.account.name.split(" ");
       if (parts.length === 1) return parts[0].charAt(0);
 
       return parts[0].charAt(0) + parts[parts.length - 1].charAt(0);
@@ -55,6 +56,7 @@ export default {
   },
   mounted() {
     this.getData();
+    console.log("asd");
   },
   data() {
     return {

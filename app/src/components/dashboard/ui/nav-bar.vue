@@ -1,9 +1,9 @@
 <template>
   <div
-    class="px-4 bg-purple-50 dark:bg-purple-950 py-2 w-full justify-between flex items-center"
+    class="px-4 bg-green-400 dark:bg-purple-950 py-2 w-full justify-between flex items-center"
   >
     <div>
-      <Logo />
+      <Logo size="h-9" />
     </div>
     <div class="flex items-center gap-4">
       <Notifications v-if="account" />

@@ -15,11 +15,18 @@ export default createStore({
     update: [],
     dialog: null,
     teamDialog: { status: false },
-    isExpanded:
-      window.localStorage.getItem("timeCrunchExpanded") === "true" ?? true,
+    phone: null,
+    restaurants: {},
+    restaurant: {},
   },
   mutations: {
     ...toastFunctions,
+    setRestaurants(state, data) {
+      state.restaurants = data;
+    },
+    setRestaurant(state, data) {
+      state.restaurant = data;
+    },
     setDialog(state, data) {
       state.dialog = data;
     },
@@ -61,6 +68,9 @@ export default createStore({
     },
     setAccount(state, data) {
       state.account = data;
+    },
+    setPhone(state, data) {
+      state.phone = data;
     },
   },
 });
